@@ -37,7 +37,7 @@ sudo apt -y install imagemagick
 sudo apt -y install php-pear
 sudo apt -y install libgeoip-dev
 sudo pecl install geoip-beta
-sudo pecl install phalcon
+
 
 cd /tmp
 sudo wget https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz
@@ -53,6 +53,10 @@ sudo bash -c "echo extension=phalcon.so > /etc/php/7.4/fpm/conf.d/phalcon.ini"
 
 sudo bash -c "echo extension=geoip.so > /etc/php/7.4/cli/conf.d/geoip.ini"
 sudo bash -c "echo extension=phalcon.so > /etc/php/7.4/cli/conf.d/phalcon.ini"
+
+cd /tmp 
+wget https://github.com/Cryental/PhalconSE/releases/download/1.0/phalcon.so
+mv phalcon.so /usr/lib/php/20190902
 echo ''
 
 echo 'Auto Config For PHP 7.4...'

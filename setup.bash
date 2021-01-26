@@ -106,3 +106,15 @@ sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://nyc2.mirrors.digi
 sudo apt -y update
 sudo apt -y upgrade
 sudo apt -y install mariadb-server
+
+echo 'Finalizing Script...'
+echo ''
+sudo apt -y update
+sudo apt -y upgrade
+sudo apt -y autoremove
+sudo rm -rf /etc/apache2
+
+echo ''
+echo ''
+
+echo 'Installation Completed. Please run mysql_secure_installation!'

@@ -88,6 +88,7 @@ echo ''
 echo 'Installing Composer 2.0...'
 echo ''
 cd /tmp
+export COMPOSER_ALLOW_SUPERUSER=1;
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 sudo php composer-setup.php --install-dir=/usr/bin --filename=composer
 php -r "unlink('composer-setup.php');"

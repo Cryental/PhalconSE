@@ -97,7 +97,14 @@ echo ''
 
 echo 'Installing Phalcon Devtools...'
 echo ''
-composer global require phalcon/devtools
+sudo apt -y install zip unzip
+cd ~
+git clone https://github.com/phalcon/phalcon-devtools.git
+cd phalcon-devtools
+sudo ln -s $(pwd)/phalcon /usr/bin/phalcon
+sudo chmod ugo+x /usr/bin/phalcon
+composer install
+
 echo ''
 
 echo 'Installing MariaDB...'

@@ -114,7 +114,9 @@ sudo apt -y update
 sudo apt -y upgrade
 sudo apt -y autoremove
 sudo rm -rf /etc/apache2
-
+cd /tmp
+sudo rm -rf .
+cd ~
 echo ''
 echo ''
 

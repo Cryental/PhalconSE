@@ -26,12 +26,6 @@ echo ''
 echo 'Installing PHP 7.4 and Extensions...'
 echo ''
 
-sudo apt -y install php7.4
-
-sudo service apache2 stop
-sudo apt -y purge apache2 apache2-utils apache2-bin
-sudo apt -y autoremove
-
 sudo apt -y install php7.4-{cgi,fpm,json,zip,gd,curl,bcmath,xml,bz2,bcmath,intl,gd,mbstring,mysql,zip,common,imagick,imap,dev,psr}
 sudo apt -y install imagemagick
 sudo apt -y install php-pear

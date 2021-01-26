@@ -74,107 +74,38 @@ sudo bash -c "echo extension=phalcon.so > /etc/php/7.4/cli/conf.d/phalcon.ini"
 ### Setup PHP 7.4
 
 ```
-sudo nano /etc/php/7.4/cgi/php.ini
-```
+cd /tmp
+wget https://raw.githubusercontent.com/Cryental/PhalconSE/main/lighttpd.conf
+sudo rm /etc/lighttpd/lighttpd.conf
+mv lighttpd.conf /etc/lighttpd/lighttpd.conf
 
-Add this line on the second line of php.ini:
-
-```
-zend_extension = /usr/lib/php/20190902/ioncube_loader_lin_7.4.so
-```
-
-Modify following lines to these values:
-
-```
-expose_php = Off
-max_execution_time = 360
-max_input_time = 180
-memory_limit = 1024M
-post_max_size = 32M
-upload_max_filesize = 1024M
-user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36"
-default_socket_timeout = 180
-opcache.enable=1
-opcache.enable_cli=1
-opcache.memory_consumption=256
-opcache.interned_strings_buffer=16
-opcache.max_accelerated_files=12000
-opcache.max_wasted_percentage=10
-opcache.validate_timestamps=1
-opcache.revalidate_freq=0
-```
-
-Save and exit the editor.
-
-Now apply the config to all:
-
-```
+wget https://raw.githubusercontent.com/Cryental/PhalconSE/main/php.ini
 sudo rm /etc/php/7.4/fpm/php.ini
 sudo rm /etc/php/7.4/cli/php.ini
+sudo rm /etc/php/7.4/cgi/php.ini
 
-sudo cp /etc/php/7.4/cgi/php.ini /etc/php/7.4/fpm/php.ini
-sudo cp /etc/php/7.4/cgi/php.ini /etc/php/7.4/cli/php.ini
+sudo cp php.ini /etc/php/7.4/fpm/php.ini
+sudo cp php.ini /etc/php/7.4/cli/php.ini
+sudo cp php.ini /etc/php/7.4/cgi/php.ini
+sudo rm php.ini
 ```
 
 ### Setup Lighttpd
 
 ```
-cd /etc/lighttpd/conf-available
-sudo rm 15-fastcgi-php.conf
-sudo nano 15-fastcgi-php.conf
-```
+cd /tmp
+wget https://raw.githubusercontent.com/Cryental/PhalconSE/main/lighttpd.conf
+wget https://raw.githubusercontent.com/Cryental/PhalconSE/main/15-fastcgi-php.conf
 
-Paste whole lines to there:
+sudo rm /etc/lighttpd/lighttpd.conf
+sudo rm /etc/lighttpd/conf-available/15-fastcgi-php.conf
 
-```
-# -*- depends: fastcgi -*-
-# /usr/share/doc/lighttpd/fastcgi.txt.gz
-# http://redmine.lighttpd.net/projects/lighttpd/wiki/Docs:ConfigurationOptions#mod_fastcgi-fastcgi
+sudo mv lighttpd.conf /etc/lighttpd/lighttpd.conf
+sudo mv 15-fastcgi-php.conf /etc/lighttpd/conf-available/15-fastcgi-php.conf
 
-## Start an FastCGI server for php (needs the php5-cgi package)
-fastcgi.server += ( ".php" =>
-        ((
-                "bin-path" => "/usr/bin/php-cgi7.4",
-                "socket" => "/var/run/php/php7.4-fpm.sock",
-                "max-procs" => 1,
-                "bin-environment" => (
-                        "PHP_FCGI_CHILDREN" => "4",
-                        "PHP_FCGI_MAX_REQUESTS" => "10000"
-                ),
-                "bin-copy-environment" => (
-                        "PATH", "SHELL", "USER"
-                ),
-                "broken-scriptfilename" => "enable"
-        ))
-)
-```
-
-Save and exit the editor.
-
-Run following commands:
-
-```
 sudo lighttpd-enable-mod fastcgi
 sudo lighttpd-enable-mod fastcgi-php
 
-sudo nano /etc/lighttpd/lighttpd.conf
-```
-
-Add this line at the end of a conf file:
-
-```
-url.rewrite-once = ( "^(/(?!(favicon.ico$|css/|js/|img/)).*)" => "/index.php?_url=$1" )
-```
-
-Add following modules to server.modules:
-
-- mod_rewrite
-
-Save and exit the editor.
-
-Restart all services to apply changes:
-
-```
 sudo service php7.4-fpm restart
 sudo service lighttpd restart
 ```

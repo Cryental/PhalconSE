@@ -74,11 +74,6 @@ sudo bash -c "echo extension=phalcon.so > /etc/php/7.4/cli/conf.d/phalcon.ini"
 ### Setup PHP 7.4
 
 ```
-cd /tmp
-wget https://raw.githubusercontent.com/Cryental/PhalconSE/main/lighttpd.conf
-sudo rm /etc/lighttpd/lighttpd.conf
-mv lighttpd.conf /etc/lighttpd/lighttpd.conf
-
 wget https://raw.githubusercontent.com/Cryental/PhalconSE/main/php.ini
 sudo rm /etc/php/7.4/fpm/php.ini
 sudo rm /etc/php/7.4/cli/php.ini

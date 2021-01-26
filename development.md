@@ -26,6 +26,7 @@ sudo apt autoremove
 ```
 sudo add-apt-repository ppa:ondrej/php
 sudo apt update
+sudo apt upgrade
 ```
 
 ### Install Lighttpd
@@ -47,11 +48,9 @@ sudo service apache2 stop
 sudo apt-get purge apache2 apache2-utils apache2-bin
 sudo apt autoremove
 
-sudo apt install php7.4-{cgi,fpm,json,zip,gd,curl,bcmath,xml,bz2,bcmath,intl,gd,mbstring,mysql,zip,common,imagick,imap,dev}
+sudo apt install php7.4-{cgi,fpm,json,zip,gd,curl,bcmath,xml,bz2,bcmath,intl,gd,mbstring,mysql,zip,common,imagick,imap,dev,psr}
 sudo apt install imagemagick
 sudo apt install php-pear
-sudo apt install php7.4-psr
-sudo apt install php-dev
 sudo apt install libgeoip-dev
 sudo pecl install geoip-beta
 sudo pecl install phalcon

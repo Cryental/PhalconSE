@@ -39,6 +39,10 @@ sudo tar -zxvf ioncube_loaders_lin_x86*
 cd ioncube/
 sudo cp /tmp/ioncube/ioncube_loader_lin_7.4.so /usr/lib/php/20190902
 
+cd /tmp 
+wget https://github.com/Cryental/PhalconSE/releases/download/1.0/phalcon.so
+mv phalcon.so /usr/lib/php/20190902
+
 sudo bash -c "echo extension=geoip.so > /etc/php/7.4/cgi/conf.d/geoip.ini"
 sudo bash -c "echo extension=phalcon.so > /etc/php/7.4/cgi/conf.d/phalcon.ini"
 
@@ -47,10 +51,6 @@ sudo bash -c "echo extension=phalcon.so > /etc/php/7.4/fpm/conf.d/phalcon.ini"
 
 sudo bash -c "echo extension=geoip.so > /etc/php/7.4/cli/conf.d/geoip.ini"
 sudo bash -c "echo extension=phalcon.so > /etc/php/7.4/cli/conf.d/phalcon.ini"
-
-cd /tmp 
-wget https://github.com/Cryental/PhalconSE/releases/download/1.0/phalcon.so
-mv phalcon.so /usr/lib/php/20190902
 echo ''
 
 echo 'Auto Config For PHP 7.4...'
